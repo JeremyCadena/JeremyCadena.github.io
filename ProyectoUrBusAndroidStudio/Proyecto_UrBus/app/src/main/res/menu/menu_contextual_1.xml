@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_words_mayus"
+        android:title="@string/letters_mayus" />
+    <item
+        android:id="@+id/item_words_min"
+        android:title="@string/words_min" />
+    <item
+        android:id="@+id/first_words_uppercase"
+        android:title="@string/first_words_Uppercase" />
+</menu>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/nav_insert_origin"
+            android:icon="@drawable/addproduct_foreground"
+            android:title="Insertar Origen" />
+
+        <item
+            android:id="@+id/nav_edit_user"
+            android:icon="@drawable/addproduct_foreground"
+            android:title="@string/update_user" />
+        <item
+            android:id="@+id/nav_deleteAccount"
+            android:icon="@drawable/delete_foreground"
+            android:title="@string/menu_deleteAccount" />
+
+        <item
+            android:id="@+id/nav_logOut"
+            android:icon="@drawable/salir_foreground"
+            android:title="@string/menu_logOut" />
+
+
+    </group>
+</menu>
