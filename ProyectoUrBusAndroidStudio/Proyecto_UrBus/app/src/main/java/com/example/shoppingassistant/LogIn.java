@@ -51,6 +51,8 @@ public class LogIn extends AppCompatActivity {
         btnGoogleL =  findViewById(R.id.btnGoogle);
         progressDialog = new ProgressDialog(this);
 
+        btnGoogleL.setEnabled(false);
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +77,7 @@ public class LogIn extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful())
                                 {
-                                    Toast.makeText(getApplicationContext(), "Bienvenido a Shopping Assistent", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Bienvenido a UrBus", Toast.LENGTH_SHORT).show();
                                     Intent activity_home = new Intent(getApplicationContext(), Home.class);
                                     startActivity(activity_home);
                                 }

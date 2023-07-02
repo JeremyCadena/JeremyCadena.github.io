@@ -64,6 +64,7 @@ public class Register extends AppCompatActivity {
                                 {
                                     Toast.makeText(getApplicationContext(), "Se ha registrado el usuario correctamente", Toast.LENGTH_SHORT).show();
                                     Intent activity_home = new Intent(getApplicationContext(), Home.class);
+                                    activity_home.putExtra("userName",username.getText().toString());
                                     startActivity(activity_home);
                                 }
                                 else

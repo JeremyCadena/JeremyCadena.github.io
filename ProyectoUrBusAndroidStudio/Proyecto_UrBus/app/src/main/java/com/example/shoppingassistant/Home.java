@@ -16,28 +16,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.example.shoppingassistant.controller.FirebaseApiClient;
 import com.example.shoppingassistant.models.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         DrawerLayout.DrawerListener {
@@ -49,6 +47,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private Button btnLogOut, btnDeleteCta, btn_add_product, btn_list_products, btn_gallery;
     private GoogleSignInClient mGoogleSingInClient;
     private GoogleSignInOptions gso;
+
+    private FirebaseApiClient firebaseApiClient;
 
     private User userF = new User();
 
@@ -93,42 +93,61 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             Glide.with(this).load(currentUser.getPhotoUrl()).into(imgUser);
         }
 
-        if (txtName.getText().toString().equals("")) {
+        if (currentUser.getDisplayName().equals("")) {
             int position = currentUser.getEmail().indexOf("@");
             String user = currentUser.getEmail().substring(0, position);
             userF.setUserName(user);
             txtName.setText(user);
         }
 
-        usersRef.whereEqualTo("userId", currentUser.getUid())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            QuerySnapshot querySnapshot = task.getResult();
-                            if (querySnapshot != null && !querySnapshot.isEmpty()) {
-                                Log.d("Home", "El usuario ya existe en la base de datos");
-                            } else {
-                                usersRef.add(userF)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                            @Override
-                                            public void onSuccess(DocumentReference documentReference) {
-                                                Log.d("Home", "Usuario agregado con ID: " + documentReference.getId());
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.w("Home", "Error al agregar el usuario", e);
-                                            }
-                                        });
-                            }
-                        } else {
-                            Log.w("Home", "Error al realizar la consulta", task.getException());
-                        }
+        // Creamos una instancia de FirebaseApiClient
+        firebaseApiClient = new FirebaseApiClient();
+
+        String userId = currentUser.getUid();
+        firebaseApiClient.getUser(userId, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.w("Home", "Error al realizar la consulta", e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    // La solicitud GET se realizó con éxito
+                    String responseBody = response.body().string();
+
+                    if (responseBody.equals("User exists")) {
+                        // El usuario ya existe en la base de datos
+                        Log.d("Home", "El usuario ya existe en la base de datos");
                     }
-                });
+                } else if (response.code() == 404) {
+                    // El recurso no existe, podemos agregarlo
+                    User user = new User(currentUser.getUid(), txtName.getText().toString(), currentUser.getEmail());
+
+                    firebaseApiClient.addUser(user, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            // Manejar la falla de la solicitud
+                            Log.w("Home", "Error al agregar el usuario", e);
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            if (response.isSuccessful()) {
+                                // La solicitud POST se realizó con éxito
+                                Log.d("Home", "Usuario agregado con ID: " + response.body().string());
+                            } else {
+                                // La solicitud POST falló
+                                Log.w("Home", "Error al agregar el usuario. Código de respuesta: " + response.code());
+                            }
+                        }
+                    });
+                } else {
+                    // La solicitud GET falló
+                    Log.w("Home", "Error al realizar la consulta. Código de respuesta: " + response.code());
+                }
+            }
+        });
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -249,37 +268,43 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     private void deleteCurrentUser(User user, FirebaseUser currentUser) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference usersRef = db.collection("users");
 
-        usersRef.whereEqualTo("userId", user.getUserId())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        firebaseApiClient.deleteUser(user.getUserId(), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                // Manejar la falla de la solicitud
+                Log.w("Home", "Error al eliminar el usuario", e);
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onSuccess(QuerySnapshot querySnapshot) {
-                        if (querySnapshot != null && !querySnapshot.isEmpty()) {
-                            DocumentReference documentReference = querySnapshot.getDocuments().get(0).getReference();
-                            documentReference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(getApplicationContext(), "Usuario eliminado de la base de datos", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "Error al eliminar el usuario de la base de datos", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                        } else {
-                            Toast.makeText(getApplicationContext(), "No se encontró el usuario en la base de datos", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+                    public void run() {
                         Toast.makeText(getApplicationContext(), "Error al eliminar el usuario de la base de datos", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    // La solicitud DELETE se realizó con éxito
+                    Log.d("Home", "Usuario eliminado de la base de datos");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "Usuario eliminado de la base de datos", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    // La solicitud DELETE falló
+                    Log.w("Home", "Error al eliminar el usuario. Código de respuesta: " + response.code());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "Error al eliminar el usuario de la base de datos", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
 
         if (currentUser != null) {
             currentUser.delete()
