@@ -51,7 +51,6 @@ public class LogIn extends AppCompatActivity {
         btnGoogleL =  findViewById(R.id.btnGoogle);
         progressDialog = new ProgressDialog(this);
 
-        btnGoogleL.setEnabled(false);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +103,7 @@ public class LogIn extends AppCompatActivity {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleClient = GoogleSignIn.getClient(this,gso);
+        mGoogleClient = GoogleSignIn.getClient(getApplicationContext(), gso);
         mAuth = FirebaseAuth.getInstance();
 
 

@@ -2,9 +2,11 @@ package com.example.shoppingassistant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,8 +39,12 @@ public class activityDestiny extends AppCompatActivity {
 
     private MapView map;
     private MapController mapController;
-    private Button btnSelectDestiny;
+    private Button btnSelectDestiny, btnSendDestiny;
     private EditText txtAddress;
+
+    private String destinyLatitude ="", destinyLongitude= "";
+
+    private String api_key_routing= "5b3ce3597851110001cf62482a3ee292e8e34765b386ab628215d214";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,7 @@ public class activityDestiny extends AppCompatActivity {
 
         map = (MapView) findViewById(R.id.mapDestiny);
         btnSelectDestiny = (Button) findViewById(R.id.btnLocationDestiny);
+        btnSendDestiny = (Button) findViewById(R.id.btnSend);
         txtAddress = (EditText) findViewById(R.id.txtLatitudeDestiny);
 
         map.setBuiltInZoomControls(true);
@@ -61,6 +68,16 @@ public class activityDestiny extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 geocodeAddress(txtAddress.getText().toString());
+            }
+        });
+
+        btnSendDestiny.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent activityStartRoute = new Intent(getApplicationContext(), StartRoute.class);
+                activityStartRoute.putExtra("destinyLatitude", destinyLatitude);
+                activityStartRoute.putExtra("destinyLongitude", destinyLongitude);
+                startActivity(activityStartRoute);
             }
         });
     }
@@ -104,7 +121,9 @@ public class activityDestiny extends AppCompatActivity {
                             if (jsonArray.length() > 0) {
                                 JSONObject firstResult = jsonArray.getJSONObject(0);
                                 double latitude = firstResult.getDouble("lat");
+                                destinyLatitude =String.valueOf(latitude);
                                 double longitude = firstResult.getDouble("lon");
+                                destinyLongitude = String.valueOf(longitude);
                                 mapController.setCenter(new GeoPoint(latitude, longitude));
                                 updateLocationOnMap(latitude, longitude);
                             } else {
@@ -126,6 +145,8 @@ public class activityDestiny extends AppCompatActivity {
         Marker originMarker = new Marker(map);
         originMarker.setPosition(new GeoPoint(Double.parseDouble(getIntent().getExtras().get("originLatitude").toString()), Double.parseDouble(getIntent().getExtras().get("originLongitude").toString())));
         originMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        originMarker.setTitle("Origen Seleccionado");
+        originMarker.setSnippet(getIntent().getExtras().get("information").toString());
 
 
         Marker marker = new Marker(map);
@@ -134,19 +155,24 @@ public class activityDestiny extends AppCompatActivity {
 
         drawRoute(new GeoPoint(Double.parseDouble(getIntent().getExtras().get("originLatitude").toString()), Double.parseDouble(getIntent().getExtras().get("originLongitude").toString())), new GeoPoint(latitude, longitude));
 
+        marker.setTitle("Destino Seleccionado");
+        marker.setSnippet(txtAddress.getText().toString());
         map.getOverlays().add(marker);
+        marker.showInfoWindow();
+
         map.getOverlays().add(originMarker);
         map.invalidate();
     }
 
+
     private void drawRoute(GeoPoint origin, GeoPoint destination) {
-        String osrmUrl = "http://your-osrm-server/route/v1/driving/" +
-                origin.getLongitude() + "," + origin.getLatitude() + ";" +
-                destination.getLongitude() + "," + destination.getLatitude() + "?steps=true";
+        String orsUrl = "https://api.openrouteservice.org/v2/directions/driving-car?api_key=" + api_key_routing +
+                "&start=" + origin.getLongitude() + "," + origin.getLatitude() +
+                "&end=" + destination.getLongitude() + "," + destination.getLatitude();
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(osrmUrl)
+                .url(orsUrl)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -180,26 +206,35 @@ public class activityDestiny extends AppCompatActivity {
         });
     }
 
-    public List<GeoPoint> parseRouteCoordinatesFromJson(String json) {
+    private List<GeoPoint> parseRouteCoordinatesFromJson(String json) {
         List<GeoPoint> coordinates = new ArrayList<>();
 
         try {
             JSONObject jsonObject = new JSONObject(json);
-            JSONArray paths = jsonObject.getJSONArray("paths");
-            JSONObject path = paths.getJSONObject(0);
-            JSONArray points = path.getJSONArray("points");
+            Log.d("TAG", "JSON completo: " + json);
 
-            for (int i = 0; i < points.length(); i++) {
-                JSONArray point = points.getJSONArray(i);
-                double latitude = point.getDouble(0);
-                double longitude = point.getDouble(1);
-                GeoPoint coordinate = new GeoPoint(latitude, longitude);
-                coordinates.add(coordinate);
+            JSONArray features = jsonObject.getJSONArray("features");
+            if (features.length() > 0) {
+                JSONObject feature = features.getJSONObject(0);
+                JSONObject geometry = feature.getJSONObject("geometry");
+                JSONArray coordinatesArray = geometry.getJSONArray("coordinates");
+
+                for (int i = 0; i < coordinatesArray.length(); i++) {
+                    JSONArray coordinate = coordinatesArray.getJSONArray(i);
+                    double longitude = coordinate.getDouble(0);
+                    double latitude = coordinate.getDouble(1);
+                    GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+                    coordinates.add(geoPoint);
+                    Log.d("TAG", "Coordenada: " + latitude + ", " + longitude);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.e("TAG", "Error al analizar la respuesta JSON: " + e.getMessage());
         }
 
         return coordinates;
     }
+
+
 }

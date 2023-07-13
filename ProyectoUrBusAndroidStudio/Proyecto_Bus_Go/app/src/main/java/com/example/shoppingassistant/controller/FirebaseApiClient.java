@@ -9,12 +9,14 @@ import java.io.IOException;
 public class FirebaseApiClient {
     private final OkHttpClient client;
 
+    private String ip ="10.40.12.106"; //"10.40.25.198";
+
     public FirebaseApiClient() {
         this.client = new OkHttpClient();
     }
 
     public void getUser(String userId, Callback callback) {
-        String url = "http://192.168.31.53:8000/urbus/user/" + userId;
+        String url = "http://"+ip+":8000/urbus/user/" + userId;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -24,7 +26,7 @@ public class FirebaseApiClient {
     }
 
     public void addUser(User user, Callback callback) {
-        String url = "http://192.168.31.53:8000/urbus/user";
+        String url = "http://"+ip+":8000/urbus/user";
 
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         String json = "{\"userId\":\"" + user.getUserId() + "\",\"userName\":\"" + user.getUserName() + "\",\"userEmail\":\"" + user.getUserEmail() + "\"}";
@@ -40,7 +42,7 @@ public class FirebaseApiClient {
     }
 
     public void editUser(String userId, User user, Callback callback) {
-        String url = "http://192.168.31.53:8000/urbus/user/" + userId;
+        String url = "http://"+ip+":8000/urbus/user/" + userId;
 
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         String json = "{\"userName\":\"" + user.getUserName() + "\",\"userEmail\":\"" + user.getUserEmail() + "\"}";
@@ -56,7 +58,7 @@ public class FirebaseApiClient {
     }
 
     public void deleteUser(String userId, Callback callback) {
-        String url = "http://192.168.31.53:8000/urbus/user/" + userId;
+        String url = "http://"+ip+":8000/urbus/user/" + userId;
 
         Request request = new Request.Builder()
                 .url(url)

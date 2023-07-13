@@ -21,6 +21,7 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -95,6 +96,7 @@ public class OriginDestinyActivity extends AppCompatActivity {
                 Intent activityDestiny = new Intent(getApplicationContext(), activityDestiny.class);
                 activityDestiny.putExtra("originLatitude",sLatitude);
                 activityDestiny.putExtra("originLongitude",sLongitude);
+                activityDestiny.putExtra("information", txtAddress.getText().toString());
                 startActivity(activityDestiny);
             }
         });
@@ -165,7 +167,12 @@ public class OriginDestinyActivity extends AppCompatActivity {
         Marker marker = new Marker(map);
         marker.setPosition(geoPoint);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        marker.setTitle("Origen Seleccionado");
+        marker.setSnippet(txtAddress.getText().toString());
         map.getOverlays().add(marker);
+
+        marker.showInfoWindow();
+
         map.invalidate();
     }
 

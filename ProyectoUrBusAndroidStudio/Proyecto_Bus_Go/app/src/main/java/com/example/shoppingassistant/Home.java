@@ -93,7 +93,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             Glide.with(this).load(currentUser.getPhotoUrl()).into(imgUser);
         }
 
-        if (currentUser.getDisplayName().equals("")) {
+        if (txtName.getText().toString().equals("")) {
             int position = currentUser.getEmail().indexOf("@");
             String user = currentUser.getEmail().substring(0, position);
             userF.setUserName(user);

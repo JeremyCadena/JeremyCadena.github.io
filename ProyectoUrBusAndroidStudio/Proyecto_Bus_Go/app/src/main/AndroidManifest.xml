@@ -21,6 +21,9 @@
         tools:replace="android:label"
         tools:targetApi="31">
         <activity
+            android:name=".StartRoute"
+            android:exported="false" />
+        <activity
             android:name=".UpdateUser"
             android:exported="false" />
 
