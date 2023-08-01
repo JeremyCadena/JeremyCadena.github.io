@@ -87,6 +87,35 @@ export const getBusStop = async (request, response) => {
     }
 };
 
+export const getBusStopName = async (request, response) => {
+    try {
+        const busStopName = request.params.name; 
+        const busStopRef = collection(db, "busStops");
+        const querySnapshot = await getDocs(query(busStopRef, where("BUSS_NAME", "==", busStopName)));
+
+        if (querySnapshot.empty) {
+            return response.status(404).send("Bus Stop doesn't exist");
+        }
+
+        const busStopData = querySnapshot.docs[0].data();
+        // Limpia los valores de los campos que puedan tener el carácter "\r"
+        const cleanedBusStop = {
+            id: querySnapshot.docs[0].id,
+            data: {
+                BUSS_ID: busStopData.BUSS_ID.trim(),
+                BUSS_MAINSTREET: busStopData.BUSS_MAINSTREET.trim(),
+                BUSS_NAME: busStopData.BUSS_NAME.trim(),
+                BUSS_SECONDARYSTREET: busStopData.BUSS_SECONDARYSTREET.trim(),
+            },
+        };
+
+        response.status(200).json(cleanedBusStop);
+
+    } catch (error) {
+        response.status(500).json({ message: error.message });
+    }
+};
+
 
 export const editBusStop = async (request, response) => {
     try {
