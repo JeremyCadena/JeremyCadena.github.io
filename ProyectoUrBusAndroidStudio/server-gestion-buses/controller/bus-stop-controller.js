@@ -13,12 +13,15 @@ export const addBusStop = async (request, response) => {
     const data = request.body;
 
     try {
-        if (data.BUSS_ID != "" || data.BUSS_ID != undefined || data.BUSS_MAINSTREET != "" || data.BUSS_MAINSTREET != undefined || data.BUSS_NAME != "" || data.BUSS_NAME != undefined || data.BUSS_SECONDARYSTREET != "" || data.BUSS_SECONDARYSTREET != undefined) {
-            const docRef = await addDoc(collection(db, "users"), { 
-                BUSS_ID: data.BUSS_ID, 
-                BUSS_MAINSTREET: data.BUSS_MAINSTREET, 
+        if (data.BUSS_ID != "" || data.BUSS_ID != undefined || data.BUSL_ID != "" || data.BUSL_ID != undefined || data.BUSS_MAINSTREET != "" || data.BUSS_MAINSTREET != undefined || data.BUSS_NAME != "" || data.BUSS_NAME != undefined || data.BUSS_SECONDARYSTREET != "" || data.BUSS_SECONDARYSTREET != undefined || data.BUSS_NODE != "" || data.BUSS_NODE != undefined || data.BUSS_SENSE != "" || data.BUSS_SENSE != undefined) {
+            const docRef = await addDoc(collection(db, "busStops"), {
+                BUSS_ID: data.BUSS_ID,
+                BUSL_ID: data.BUSL_ID,
+                BUSS_MAINSTREET: data.BUSS_MAINSTREET,
                 BUSS_NAME: data.BUSS_NAME,
-                BUSS_SECONDARYSTREET: data.BUSS_SECONDARYSTREET
+                BUSS_NODE: data.BUSS_NODE,
+                BUSS_SECONDARYSTREET: data.BUSS_SECONDARYSTREET,
+                BUSS_SENSE: data.BUSS_SENSE,
             });
             response.status(200).json("Bus Stop successfully added with ID " + docRef.id);
         }
@@ -43,10 +46,13 @@ export const getAllBusStops = async (request, response) => {
             const cleanedData = {
                 id: doc.id,
                 data: {
+                    BUSL_ID: data.BUSL_ID.trim(),
                     BUSS_ID: data.BUSS_ID.trim(),
                     BUSS_MAINSTREET: data.BUSS_MAINSTREET.trim(),
                     BUSS_NAME: data.BUSS_NAME.trim(),
+                    BUSS_NODE: data.BUSS_NODE,
                     BUSS_SECONDARYSTREET: data.BUSS_SECONDARYSTREET.trim(),
+                    BUSS_SENSE: data.BUSS_SENSE.trim(),
                 },
             };
             busStops.push(cleanedData);
@@ -60,7 +66,7 @@ export const getAllBusStops = async (request, response) => {
 
 export const getBusStop = async (request, response) => {
     try {
-        const busStopId = request.params.id; 
+        const busStopId = request.params.id;
         const busStopRef = collection(db, "busStops");
         const querySnapshot = await getDocs(query(busStopRef, where("BUSS_ID", "==", busStopId)));
 
@@ -73,10 +79,13 @@ export const getBusStop = async (request, response) => {
         const cleanedBusStop = {
             id: querySnapshot.docs[0].id,
             data: {
+                BUSL_ID: busStopData.BUSL_ID.trim(),
                 BUSS_ID: busStopData.BUSS_ID.trim(),
                 BUSS_MAINSTREET: busStopData.BUSS_MAINSTREET.trim(),
                 BUSS_NAME: busStopData.BUSS_NAME.trim(),
+                BUSS_NODE: busStopData.BUSS_NODE,
                 BUSS_SECONDARYSTREET: busStopData.BUSS_SECONDARYSTREET.trim(),
+                BUSS_SENSE: busStopData.BUSS_SENSE.trim(),
             },
         };
 
@@ -89,7 +98,7 @@ export const getBusStop = async (request, response) => {
 
 export const getBusStopName = async (request, response) => {
     try {
-        const busStopName = request.params.name; 
+        const busStopName = request.params.name;
         const busStopRef = collection(db, "busStops");
         const querySnapshot = await getDocs(query(busStopRef, where("BUSS_NAME", "==", busStopName)));
 
@@ -102,10 +111,13 @@ export const getBusStopName = async (request, response) => {
         const cleanedBusStop = {
             id: querySnapshot.docs[0].id,
             data: {
+                BUSL_ID: busStopData.BUSL_ID.trim(),
                 BUSS_ID: busStopData.BUSS_ID.trim(),
                 BUSS_MAINSTREET: busStopData.BUSS_MAINSTREET.trim(),
                 BUSS_NAME: busStopData.BUSS_NAME.trim(),
+                BUSS_NODE: busStopData.BUSS_NODE,
                 BUSS_SECONDARYSTREET: busStopData.BUSS_SECONDARYSTREET.trim(),
+                BUSS_SENSE: busStopData.BUSS_SENSE.trim(),
             },
         };
 
@@ -115,6 +127,37 @@ export const getBusStopName = async (request, response) => {
         response.status(500).json({ message: error.message });
     }
 };
+
+export const getBusStopSense = async (request, response) => {
+    try {
+      const busStopName = request.params.sense;
+      const busStopRef = collection(db, "busStops");
+      const querySnapshot = await getDocs(query(busStopRef, where("BUSS_SENSE", "==", busStopName)));
+  
+      const busStopsList = [];
+      querySnapshot.forEach((doc) => {
+        const busStopData = doc.data();
+        const cleanedBusStop = {
+          id: doc.id,
+          data: {
+            BUSL_ID: busStopData.BUSL_ID.trim(),
+            BUSS_ID: busStopData.BUSS_ID.trim(),
+            BUSS_MAINSTREET: busStopData.BUSS_MAINSTREET.trim(),
+            BUSS_NAME: busStopData.BUSS_NAME.trim(),
+            BUSS_NODE: busStopData.BUSS_NODE,
+            BUSS_SECONDARYSTREET: busStopData.BUSS_SECONDARYSTREET.trim(),
+            BUSS_SENSE: busStopData.BUSS_SENSE.trim(),
+          },
+        };
+        busStopsList.push(cleanedBusStop);
+      });
+  
+      response.status(200).json(busStopsList);
+  
+    } catch (error) {
+      response.status(500).json({ message: error.message });
+    }
+  };
 
 
 export const editBusStop = async (request, response) => {
@@ -130,18 +173,21 @@ export const editBusStop = async (request, response) => {
         const busStopDoc = querySnapshot.docs[0];
         const busStopRef = doc(db, "busStops", busStopDoc.id);
 
-        const { BUSS_ID, BUSS_MAINSTREET, BUSS_NAME, BUSS_SECONDARYSTREET } = request.body;
+        const { BUSL_ID, BUSS_ID, BUSS_MAINSTREET, BUSS_NAME,BUSS_NODE, BUSS_SECONDARYSTREET, BUSS_SENSE } = request.body;
 
         await updateDoc(busStopRef, {
-            BUSS_ID, BUSS_MAINSTREET, BUSS_NAME, BUSS_SECONDARYSTREET
+            BUSL_ID,BUSS_ID, BUSS_MAINSTREET, BUSS_NAME,BUSS_NODE, BUSS_SECONDARYSTREET, BUSS_SENSE
         });
 
         const updatedBusStopDoc = await getDoc(busStopRef);
         const updateBusStop = {
-            BUSS_ID: updatedBusStopDoc.data().BUSS_ID,
-            BUSS_MAINSTREET: updatedBusStopDoc.data().BUSS_MAINSTREET,
-            BUSS_NAME: updatedBusStopDoc.data().BUSS_NAME,
-            BUSS_SECONDARYSTREET: updatedBusStopDoc.data().BUSS_SECONDARYSTREET
+            BUSL_ID: updatedBusStopDoc.BUSL_ID.trim(),
+            BUSS_ID: updatedBusStopDoc.BUSS_ID.trim(),
+            BUSS_MAINSTREET: updatedBusStopDoc.BUSS_MAINSTREET.trim(),
+            BUSS_NAME: updatedBusStopDoc.BUSS_NAME.trim(),
+            BUSS_NODE: updatedBusStopDoc.BUSS_NODE.trim(),
+            BUSS_SECONDARYSTREET: updatedBusStopDoc.BUSS_SECONDARYSTREET.trim(),
+            BUSS_SENSE: updatedBusStopDoc.BUSS_SENSE.trim(),
         };
 
         response.status(200).json(updateBusStop);
