@@ -1,0 +1,21 @@
+
+j
+:app/src/main/java/com/example/shoppingassistant/LogIn.java,3\0\3079c56b16014c7c77a017c6938558873f2fcd59
+@
+app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+p
+@app/src/main/java/com/example/shoppingassistant/models/BusS.java,1\f\1f438f46b7c3ee077bc715af6a09bca81571c4c1
+t
+Dapp/src/main/java/com/example/shoppingassistant/activityDestiny.java,f\f\ff8aef427b94bd4ce4df069e4a9dc6dbca180a7f
+p
+@app/src/main/java/com/example/shoppingassistant/models/User.java,c\c\cc90240bee30c80ed375510e1c5afb8d1310aa97
+m
+=app/src/main/java/com/example/shoppingassistant/Register.java,a\e\ae14aa2a4e8b00915f807140778deef58f02e7f7
+É
+Sapp/src/androidTest/java/com/example/shoppingassistant/ExampleInstrumentedTest.java,e\6\e603a4c60e22ef533d979b155894373b1d4f10d6
+i
+9app/src/main/java/com/example/shoppingassistant/Home.java,9\d\9d8b22bb255c229387b3b5a9b79d891c114feb12
+Å
+Qapp/src/main/java/com/example/shoppingassistant/controller/FirebaseApiClient.java,8\c\8c96fd4b1eccb1d7d4f79a5ba777ec0e298589fa

@@ -1,0 +1,53 @@
+
+f
+java:S1192Ä"JDefine a constant instead of duplicating this literal "BUSS_NODE" 3 times.(ªÇı¹ûÿÿÿÿ
+k
+java:S1192­"ODefine a constant instead of duplicating this literal "originLatitude" 3 times.(©Áğ¤ıÿÿÿÿ
+l
+java:S1192¹"PDefine a constant instead of duplicating this literal "BUSS_MAINSTREET" 5 times.(ÿ¨ê±şÿÿÿÿ
+l
+java:S1192®"PDefine a constant instead of duplicating this literal "originLongitude" 3 times.(¼Û˜¸şÿÿÿÿ
+l
+java:S1192º"UDefine a constant instead of duplicating this literal "BUSS_SECONDARYSTREET" 5 times.(ı¢ö
+C
+java:S1604J"(Make this anonymous inner class a lambda(äìÊ”øÿÿÿÿ
+>
+java:S1604Q"(Make this anonymous inner class a lambda(¥Ó–¸
+C
+java:S1604o"(Make this anonymous inner class a lambda(˜ã¯şÿÿÿÿ
+C
+java:S1604{"(Make this anonymous inner class a lambda(˜ã¯şÿÿÿÿ
+D
+java:S1604™"(Make this anonymous inner class a lambda(˜ã¯şÿÿÿÿ
+?
+java:S1604û"(Make this anonymous inner class a lambda(‡»€Š
+D
+java:S1604¥"(Make this anonymous inner class a lambda(˜ã¯şÿÿÿÿ
+b	java:S101-"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(­ÿËÉ
+t	java:S1166"ZRename this field "api_key_routing" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘œ«¬ûÿÿÿÿ
+B
+java:S16591",Declare "btnSendDestiny" on a separate line.(é÷¨›
+D
+java:S16594".Declare "destinyLongitude" on a separate line.(ŸôĞÅ
+u
+java:S14501"_Remove the "btnSelectDestiny" field and declare it as a local variable in the relevant methods.(é÷¨›
+s
+java:S14501"]Remove the "btnSendDestiny" field and declare it as a local variable in the relevant methods.(é÷¨›
+T
+java:S1874<"9Remove this use of "PreferenceManager"; it is deprecated.(½íÓúÿÿÿÿ
+^
+java:S1874<"CRemove this use of "getDefaultSharedPreferences"; it is deprecated.(½íÓúÿÿÿÿ
+Y
+java:S1874C">Remove this use of "setBuiltInZoomControls"; it is deprecated.(ßíİŠÿÿÿÿÿ
+m
+java:S3776\"RRefactor this method to reduce its Cognitive Complexity from 48 to the 15 allowed.(Ò©éÔøÿÿÿÿ
+J
+java:S1874Ë"3Remove this use of "getDrawable"; it is deprecated.(¶–ä±
+L
+java:S1874ÿ"0Remove this use of "setColor"; it is deprecated.(ÓŠú‰ıÿÿÿÿ
+L
+java:S1874€"0Remove this use of "setWidth"; it is deprecated.(‹ÊÑ÷ıÿÿÿÿ
+F
+java:S1874§"0Remove this use of "setColor"; it is deprecated.(†”•
+L
+java:S1874¨"0Remove this use of "setWidth"; it is deprecated.(‹ÊÑ÷ıÿÿÿÿ

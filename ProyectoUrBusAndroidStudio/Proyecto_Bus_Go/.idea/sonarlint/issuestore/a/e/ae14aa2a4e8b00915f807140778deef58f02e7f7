@@ -1,0 +1,19 @@
+
+f	java:S117,"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¥Ø…è
+k	java:S117-"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üªÑÿÿÿÿÿ
+k	java:S117B"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Þâš’ûÿÿÿÿ
+>
+java:S1604<"(Make this anonymous inner class a lambda(³Ö×•
+>
+java:S1604)"(Make this anonymous inner class a lambda(œ‘™­
+k	java:S116"VRename this field "btn_sing_up" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´›ú¿
+[
+java:S1659"EDeclare "username" and all following declarations on a separate line.(±¿ë’
+p
+java:S1450"ZRemove the "btn_sing_up" field and declare it as a local variable in the relevant methods.(´›ú¿
+Q
+java:S1874"6Remove this use of "ProgressDialog"; it is deprecated.(·á…Çùÿÿÿÿ
+Q
+java:S1874""6Remove this use of "ProgressDialog"; it is deprecated.(¿Ú•ðúÿÿÿÿ
+H
+java:S18748"2Remove this use of "setMessage"; it is deprecated.(ŒŸ«…

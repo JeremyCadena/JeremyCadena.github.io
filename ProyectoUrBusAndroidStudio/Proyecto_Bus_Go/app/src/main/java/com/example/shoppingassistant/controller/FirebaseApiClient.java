@@ -9,7 +9,7 @@ import java.io.IOException;
 public class FirebaseApiClient {
     private final OkHttpClient client;
 
-    private String ip ="10.40.12.106"; //"10.40.25.198";
+    private String ip ="10.40.21.143"; //"10.40.25.198";
 
     public FirebaseApiClient() {
         this.client = new OkHttpClient();

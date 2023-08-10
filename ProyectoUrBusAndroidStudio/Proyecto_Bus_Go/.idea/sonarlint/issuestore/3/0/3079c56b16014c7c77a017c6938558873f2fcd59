@@ -1,0 +1,38 @@
+
+k	java:S117:"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜Ú˜ºúÿÿÿÿ
+k	java:S117;"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üªÑÿÿÿÿÿ
+k	java:S117P"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şâš’ûÿÿÿÿ
+>
+java:S1604J"(Make this anonymous inner class a lambda(³Ö×•
+>
+java:S16047"(Make this anonymous inner class a lambda(Î§£¿
+>
+java:S1604]"(Make this anonymous inner class a lambda(É¦ÔŠ
+C
+java:S1604n"(Make this anonymous inner class a lambda(‘¦‡ıÿÿÿÿ
+D
+java:S1604”"(Make this anonymous inner class a lambda(¥íîŸÿÿÿÿÿ
+o	java:S116$"URename this field "RC_SIGN_IN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Äı™¥üÿÿÿÿ
+c	java:S116'"NRename this field "TAG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚ë†
+<
+java:S1170$"!Make this final field static too.(Äı™¥üÿÿÿÿ
+<
+java:S1659!"&Declare "password" on a separate line.(‡‰‹¨
+<
+java:S1659""&Declare "btnLogin" on a separate line.(§İÀº
+t
+java:S1450#"YRemove the "btnGoogleL" field and declare it as a local variable in the relevant methods.(û×±Ôıÿÿÿÿ
+m
+java:S1450""WRemove the "btnLogin" field and declare it as a local variable in the relevant methods.(§İÀº
+n
+java:S1450""XRemove the "btnSingUp" field and declare it as a local variable in the relevant methods.(§İÀº
+Q
+java:S1874("6Remove this use of "ProgressDialog"; it is deprecated.(·á…Çùÿÿÿÿ
+Q
+java:S18744"6Remove this use of "ProgressDialog"; it is deprecated.(¿Ú•ğúÿÿÿÿ
+M
+java:S1874F"2Remove this use of "setMessage"; it is deprecated.(´«Æÿÿÿÿÿ
+e
+java:S1874w"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(Ë“ïúÿÿÿÿ
+T
+java:S1874§">Remove this use of "startActivityForResult"; it is deprecated.(Ğ»œh
