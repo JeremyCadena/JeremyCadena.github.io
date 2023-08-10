@@ -130,35 +130,37 @@ export const getBusStopName = async (request, response) => {
 
 export const getBusStopSense = async (request, response) => {
     try {
-      const busStopName = request.params.sense;
-      const busStopRef = collection(db, "busStops");
-      const querySnapshot = await getDocs(query(busStopRef, where("BUSS_SENSE", "==", busStopName)));
-  
-      const busStopsList = [];
-      querySnapshot.forEach((doc) => {
-        const busStopData = doc.data();
-        const cleanedBusStop = {
-          id: doc.id,
-          data: {
-            BUSL_ID: busStopData.BUSL_ID.trim(),
-            BUSS_ID: busStopData.BUSS_ID.trim(),
-            BUSS_MAINSTREET: busStopData.BUSS_MAINSTREET.trim(),
-            BUSS_NAME: busStopData.BUSS_NAME.trim(),
-            BUSS_NODE: busStopData.BUSS_NODE,
-            BUSS_SECONDARYSTREET: busStopData.BUSS_SECONDARYSTREET.trim(),
-            BUSS_SENSE: busStopData.BUSS_SENSE.trim(),
-          },
-        };
-        busStopsList.push(cleanedBusStop);
-      });
-  
-      response.status(200).json(busStopsList);
-  
-    } catch (error) {
-      response.status(500).json({ message: error.message });
-    }
-  };
+        const busStopName = request.params.sense;
+        const busStopRef = collection(db, "busStops");
+        const querySnapshot = await getDocs(query(busStopRef, where("BUSS_SENSE", "==", busStopName)));
 
+        const busStopsList = [];
+        querySnapshot.forEach((doc) => {
+            const busStopData = doc.data();
+            const cleanedBusStop = {
+                id: doc.id,
+                data: {
+                    BUSL_ID: busStopData.BUSL_ID.trim(),
+                    BUSS_ID: busStopData.BUSS_ID.trim(),
+                    BUSS_MAINSTREET: busStopData.BUSS_MAINSTREET.trim(),
+                    BUSS_NAME: busStopData.BUSS_NAME.trim(),
+                    BUSS_NODE: busStopData.BUSS_NODE,
+                    BUSS_SECONDARYSTREET: busStopData.BUSS_SECONDARYSTREET.trim(),
+                    BUSS_SENSE: busStopData.BUSS_SENSE.trim(),
+                },
+            };
+        busStopsList.push(cleanedBusStop);
+        });
+
+      // Ordenar el array busStopsList por BUSS_NODE de menor a mayor
+        busStopsList.sort((a, b) => a.data.BUSS_NODE - b.data.BUSS_NODE);
+
+        response.status(200).json(busStopsList);
+
+    } catch (error) {
+        response.status(500).json({ message: error.message });
+    }
+}; 
 
 export const editBusStop = async (request, response) => {
     try {
