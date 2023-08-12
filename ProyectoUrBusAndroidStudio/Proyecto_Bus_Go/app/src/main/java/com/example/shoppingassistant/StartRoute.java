@@ -50,6 +50,7 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
     private boolean isGPSEnabled;
     private boolean isNetworkEnabled;
     private boolean canGetLocation;
+    private Marker trackingMarker;
 
     private String api_key_routing= "5b3ce3597851110001cf62482a3ee292e8e34765b386ab628215d214";
 
@@ -124,7 +125,7 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
 
                             GeoPoint destination = new GeoPoint(-2.90055, -79.00453); // Coordenadas del destino
 
-                            addMarker(currentLocation, "Ubicación actual");
+                            addTrackingMarker(currentLocation);
                             addMarker(destination, "Destino");
 
                             drawRoute(currentLocation, destination);
@@ -144,8 +145,8 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
 
                             GeoPoint destination = new GeoPoint(-2.90055, -79.00453); // Coordenadas del destino
 
-                            addMarker(currentLocation, "Ubicación actual");
                             addMarker(destination, "Destino");
+                            addTrackingMarker(currentLocation);
 
                             drawRoute(currentLocation, destination);
                         }
@@ -237,6 +238,23 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
         return coordinates;
     }
 
+    private void addTrackingMarker(GeoPoint position) {
+        if (trackingMarker != null) {
+            map.getOverlays().remove(trackingMarker);
+            trackingMarker = new Marker(map);
+            trackingMarker.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_tracking_marker));
+            map.getOverlays().add(trackingMarker);
+        }
+        if (trackingMarker == null) {
+            trackingMarker = new Marker(map);
+            trackingMarker.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_tracking_marker));
+            map.getOverlays().add(trackingMarker);
+        }
+
+        trackingMarker.setPosition(position);
+        map.invalidate();
+    }
+
     @Override
     public void onLocationChanged(@NonNull Location location) {
         double latitude = location.getLatitude();
@@ -244,6 +262,8 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
 
         GeoPoint currentLocation = new GeoPoint(latitude, longitude);
         mapController.setCenter(currentLocation);
+        addTrackingMarker(currentLocation);
+
     }
 
     @Override

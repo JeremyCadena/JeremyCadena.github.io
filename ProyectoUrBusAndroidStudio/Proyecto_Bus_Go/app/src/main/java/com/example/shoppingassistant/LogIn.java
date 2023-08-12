@@ -15,29 +15,40 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.OAuthProvider;
 
 public class LogIn extends AppCompatActivity {
     private EditText username, password;
     private Button btnSingUp,btnLogin;
-    private ImageButton btnGoogleL;
     private final int RC_SIGN_IN=1;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleClient;
     private String TAG= "GoogleSignInLoginActivity";
     private ProgressDialog progressDialog;
+    private CallbackManager mCallbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +59,6 @@ public class LogIn extends AppCompatActivity {
         password = findViewById(R.id.lblPasswordLog);
         btnLogin = findViewById(R.id.btnLogIn);
         btnSingUp = findViewById(R.id.btnSingUp);
-        btnGoogleL =  findViewById(R.id.btnGoogle);
         progressDialog = new ProgressDialog(this);
 
 
@@ -106,19 +116,31 @@ public class LogIn extends AppCompatActivity {
         mGoogleClient = GoogleSignIn.getClient(getApplicationContext(), gso);
         mAuth = FirebaseAuth.getInstance();
 
+    }
 
-        btnGoogleL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signInWithGoogle();
-            }
-        });
+    private void handleFacebookAccessToken(AccessToken token) {
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent homeActivity = new Intent(LogIn.this,Home.class);
+                            startActivity(homeActivity);
+                            LogIn.this.finish();
+                        } else {
+                            Toast.makeText(LogIn.this, "Error al iniciar sesion con Facebook: "+task.getException().toString(),Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode,resultCode,data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
         if(requestCode == RC_SIGN_IN)
         {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);

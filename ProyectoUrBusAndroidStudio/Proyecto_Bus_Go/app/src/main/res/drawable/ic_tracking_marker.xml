@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Círculo azul -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#2196F3" />
+        </shape>
+    </item>
+    <!-- Triángulo blanco en sentido contrario -->
+    <item android:top="1dp" android:drawable="@drawable/ic_white_triangle" />
+</layer-list>
+

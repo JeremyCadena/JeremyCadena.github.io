@@ -1,38 +1,44 @@
 
-k	java:S117:"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜Ú˜ºúÿÿÿÿ
-k	java:S117;"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üªÑÿÿÿÿÿ
-k	java:S117P"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şâš’ûÿÿÿÿ
->
-java:S1604J"(Make this anonymous inner class a lambda(³Ö×•
->
-java:S16047"(Make this anonymous inner class a lambda(Î§£¿
->
-java:S1604]"(Make this anonymous inner class a lambda(É¦ÔŠ
+r	java:S117D"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜Ú˜ºúÿÿÿÿ8è—Œ½1
+r	java:S117E"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üªÑÿÿÿÿÿ8Äê‘½1
+r	java:S117Z"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şâš’ûÿÿÿÿ8Äê‘½1
+E
+java:S1604T"(Make this anonymous inner class a lambda(³Ö×•8Åê‘½1
+E
+java:S1604A"(Make this anonymous inner class a lambda(Î§£¿8Åê‘½1
+E
+java:S1604g"(Make this anonymous inner class a lambda(É¦ÔŠ8Åê‘½1
+J
+java:S1604|"(Make this anonymous inner class a lambda(¥íîŸÿÿÿÿÿ8Åê‘½1
+K
+java:S1604ª"(Make this anonymous inner class a lambda(¥íîŸÿÿÿÿÿ8Æê‘½1
+v	java:S116."URename this field "RC_SIGN_IN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Äı™¥üÿÿÿÿ8·ë‘½1
+j	java:S1161"NRename this field "TAG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚ë†8·ë‘½1
 C
-java:S1604n"(Make this anonymous inner class a lambda(‘¦‡ıÿÿÿÿ
-D
-java:S1604”"(Make this anonymous inner class a lambda(¥íîŸÿÿÿÿÿ
-o	java:S116$"URename this field "RC_SIGN_IN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Äı™¥üÿÿÿÿ
-c	java:S116'"NRename this field "TAG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚ë†
+java:S1170."!Make this final field static too.(Äı™¥üÿÿÿÿ8¿ë‘½1
 <
-java:S1170$"!Make this final field static too.(Äı™¥üÿÿÿÿ
-<
-java:S1659!"&Declare "password" on a separate line.(‡‰‹¨
-<
-java:S1659""&Declare "btnLogin" on a separate line.(§İÀº
+java:S1659,"&Declare "password" on a separate line.(‡‰‹¨
+C
+java:S1659-"&Declare "btnLogin" on a separate line.(§İÀº8Âë‘½1
 t
-java:S1450#"YRemove the "btnGoogleL" field and declare it as a local variable in the relevant methods.(û×±Ôıÿÿÿÿ
-m
-java:S1450""WRemove the "btnLogin" field and declare it as a local variable in the relevant methods.(§İÀº
-n
-java:S1450""XRemove the "btnSingUp" field and declare it as a local variable in the relevant methods.(§İÀº
-Q
-java:S1874("6Remove this use of "ProgressDialog"; it is deprecated.(·á…Çùÿÿÿÿ
-Q
-java:S18744"6Remove this use of "ProgressDialog"; it is deprecated.(¿Ú•ğúÿÿÿÿ
-M
-java:S1874F"2Remove this use of "setMessage"; it is deprecated.(´«Æÿÿÿÿÿ
-e
-java:S1874w"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(Ë“ïúÿÿÿÿ
+java:S1450-"WRemove the "btnLogin" field and declare it as a local variable in the relevant methods.(§İÀº8Ãë‘½1
+u
+java:S1450-"XRemove the "btnSingUp" field and declare it as a local variable in the relevant methods.(§İÀº8Äë‘½1
+X
+java:S18742"6Remove this use of "ProgressDialog"; it is deprecated.(·á…Çùÿÿÿÿ8Ëë‘½1
+X
+java:S1874>"6Remove this use of "ProgressDialog"; it is deprecated.(¿Ú•ğúÿÿÿÿ8Òë‘½1
 T
-java:S1874§">Remove this use of "startActivityForResult"; it is deprecated.(Ğ»œh
+java:S1874P"2Remove this use of "setMessage"; it is deprecated.(´«Æÿÿÿÿÿ8×ë‘½1
+[
+java:S1854€"8Remove this useless assignment to local variable "user".(©Í”äıÿÿÿÿ8öë‘½1
+L
+java:S1481€")Remove this unused "user" local variable.(©Í”äıÿÿÿÿ8÷ë‘½1
+m
+java:S1874Œ"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(Ë“ïúÿÿÿÿ8øë‘½1
+[
+java:S1874½">Remove this use of "startActivityForResult"; it is deprecated.(Ğ»œh8„ì‘½1
+`
+java:S1144y">Remove this unused private "handleFacebookAccessToken" method.(ú÷«ìşÿÿÿÿ8¹€À½1
+S
+java:S1144»"5Remove this unused private "signInWithGoogle" method.(Úºğ‚8†ì‘½1

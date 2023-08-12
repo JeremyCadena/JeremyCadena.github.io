@@ -81,5 +81,6 @@
     <string name="contrase_a_nueva">Contraseña Nueva</string>
     <string name="repita_contrase_a_nueva">Repita Contraseña Nueva</string>
     <string name="contrase_a_antigua">Contraseña Antigua</string>
+    <string name="facebook_app_id">157435807374666</string>
 
 </resources>
