@@ -5,7 +5,7 @@ import okhttp3.*;
 public class FirebaseApiBuss {
     private final OkHttpClient client;
 
-    private String ip = "10.40.5.57"; //"10.40.25.198";
+    private String ip = "137.184.2.146"; //"10.40.25.198";
 
     public FirebaseApiBuss() {
         this.client = new OkHttpClient();

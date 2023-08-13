@@ -50,6 +50,7 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
     private boolean isGPSEnabled;
     private boolean isNetworkEnabled;
     private boolean canGetLocation;
+    private GeoPoint destinationFinal;
     private Marker trackingMarker;
 
     private String api_key_routing= "5b3ce3597851110001cf62482a3ee292e8e34765b386ab628215d214";
@@ -123,9 +124,11 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
                             GeoPoint currentLocation = new GeoPoint(latitude, longitude);
                             mapController.setCenter(currentLocation);
 
-                            GeoPoint destination = new GeoPoint(-2.90055, -79.00453); // Coordenadas del destino
+                            GeoPoint destination = new GeoPoint(Double.parseDouble(getIntent().getExtras().get("destinyLatitude").toString()), Double.parseDouble(getIntent().getExtras().get("destinyLongitude").toString()));
 
-                            addTrackingMarker(currentLocation);
+                            destinationFinal = destination;
+
+                            addTrackingMarker(currentLocation,destination);
                             addMarker(destination, "Destino");
 
                             drawRoute(currentLocation, destination);
@@ -143,10 +146,12 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
                             GeoPoint currentLocation = new GeoPoint(latitude, longitude);
                             mapController.setCenter(currentLocation);
 
-                            GeoPoint destination = new GeoPoint(-2.90055, -79.00453); // Coordenadas del destino
+                            GeoPoint destination = new GeoPoint(Double.parseDouble(getIntent().getExtras().get("destinyLatitude").toString()), Double.parseDouble(getIntent().getExtras().get("destinyLongitude").toString()));
+
+                            destinationFinal = destination;
 
                             addMarker(destination, "Destino");
-                            addTrackingMarker(currentLocation);
+                            addTrackingMarker(currentLocation,destination);
 
                             drawRoute(currentLocation, destination);
                         }
@@ -238,7 +243,7 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
         return coordinates;
     }
 
-    private void addTrackingMarker(GeoPoint position) {
+    private void addTrackingMarker(GeoPoint position, GeoPoint destination) {
         if (trackingMarker != null) {
             map.getOverlays().remove(trackingMarker);
             trackingMarker = new Marker(map);
@@ -250,8 +255,9 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
             trackingMarker.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_tracking_marker));
             map.getOverlays().add(trackingMarker);
         }
-
         trackingMarker.setPosition(position);
+
+        drawRoute(position,destination);
         map.invalidate();
     }
 
@@ -262,7 +268,7 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
 
         GeoPoint currentLocation = new GeoPoint(latitude, longitude);
         mapController.setCenter(currentLocation);
-        addTrackingMarker(currentLocation);
+        addTrackingMarker(currentLocation,destinationFinal);
 
     }
 
