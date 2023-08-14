@@ -265,7 +265,7 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
     public void onLocationChanged(@NonNull Location location) {
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
-
+        map.getOverlays().clear();
         GeoPoint currentLocation = new GeoPoint(latitude, longitude);
         mapController.setCenter(currentLocation);
         addTrackingMarker(currentLocation,destinationFinal);
