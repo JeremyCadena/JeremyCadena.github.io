@@ -269,7 +269,7 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
         GeoPoint currentLocation = new GeoPoint(latitude, longitude);
         mapController.setCenter(currentLocation);
         addTrackingMarker(currentLocation,destinationFinal);
-
+        addMarker(destinationFinal, "Destino Seleccionado");
     }
 
     @Override
