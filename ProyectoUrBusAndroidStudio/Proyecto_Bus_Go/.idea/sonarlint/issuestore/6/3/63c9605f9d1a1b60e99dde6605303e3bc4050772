@@ -1,38 +1,38 @@
 
 C
-java:S1604N"(Make this anonymous inner class a lambda(öÅáÎûÿÿÿÿ
-p
-java:S2259ˆ"MA "NullPointerException" could be thrown; "locationManager" is nullable here.(û„Ï«şÿÿÿÿ8¸³­»1
-t	java:S1167"ZRename this field "api_key_routing" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘œ«¬ûÿÿÿÿ
+java:S1604X"(Make this anonymous inner class a lambda(öÅáÎûÿÿÿÿ
+i
+java:S2259”"MA "NullPointerException" could be thrown; "locationManager" is nullable here.(û„Ï«şÿÿÿÿ
+t	java:S116<"ZRename this field "api_key_routing" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘œ«¬ûÿÿÿÿ
 ˜
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÀÄŞ’
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÀÄŞ’
 
-java:S1186’"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ŸüÊúÿÿÿÿ
+java:S1186¡"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ŸüÊúÿÿÿÿ
 ˜
-java:S1186–"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(„Ãõ
+java:S1186¥"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(„Ãõ
 r
-java:S1450/"\Remove the "btnStartRoute" field and declare it as a local variable in the relevant methods.(ï¦â¡
-z
-java:S14504"]Remove the "canGetLocation" field and declare it as a local variable in the relevant methods.(Ìå­¡8 î¤»1
+java:S14503"\Remove the "btnStartRoute" field and declare it as a local variable in the relevant methods.(ï¦â¡
+s
+java:S14508"]Remove the "canGetLocation" field and declare it as a local variable in the relevant methods.(Ìå­¡
 v
-java:S14502"[Remove the "isGPSEnabled" field and declare it as a local variable in the relevant methods.(Îà³íşÿÿÿÿ
+java:S14506"[Remove the "isGPSEnabled" field and declare it as a local variable in the relevant methods.(Îà³íşÿÿÿÿ
 u
-java:S14503"_Remove the "isNetworkEnabled" field and declare it as a local variable in the relevant methods.(ÛÜ½
+java:S14507"_Remove the "isNetworkEnabled" field and declare it as a local variable in the relevant methods.(ÛÜ½
 T
-java:S1874@"9Remove this use of "PreferenceManager"; it is deprecated.(¬«˜¥ıÿÿÿÿ
+java:S1874E"9Remove this use of "PreferenceManager"; it is deprecated.(¬«˜¥ıÿÿÿÿ
 ^
-java:S1874@"CRemove this use of "getDefaultSharedPreferences"; it is deprecated.(¬«˜¥ıÿÿÿÿ
+java:S1874E"CRemove this use of "getDefaultSharedPreferences"; it is deprecated.(¬«˜¥ıÿÿÿÿ
 Y
-java:S1874E">Remove this use of "setBuiltInZoomControls"; it is deprecated.(ßíİŠÿÿÿÿÿ
+java:S1874O">Remove this use of "setBuiltInZoomControls"; it is deprecated.(ßíİŠÿÿÿÿÿ
 e
-java:S1874_"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(Ó»×¶şÿÿÿÿ
+java:S1874i"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(Ó»×¶şÿÿÿÿ
 m
-java:S3776j"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(’Ÿİñıÿÿÿÿ
+java:S3776t"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(’Ÿİñıÿÿÿÿ
 F
-java:S1874Æ"0Remove this use of "setColor"; it is deprecated.(†”•
+java:S1874Ô"0Remove this use of "setColor"; it is deprecated.(†”•
 L
-java:S1874Ç"0Remove this use of "setWidth"; it is deprecated.(‹ÊÑ÷ıÿÿÿÿ
+java:S1874Õ"0Remove this use of "setWidth"; it is deprecated.(‹ÊÑ÷ıÿÿÿÿ
 a
-java:S1874"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(ÀÄŞ’
-O
-java:S10684"2Remove this unused "canGetLocation" private field.(Ìå­¡8ôî¤»1
+java:S1874"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(ÀÄŞ’
+H
+java:S10688"2Remove this unused "canGetLocation" private field.(Ìå­¡

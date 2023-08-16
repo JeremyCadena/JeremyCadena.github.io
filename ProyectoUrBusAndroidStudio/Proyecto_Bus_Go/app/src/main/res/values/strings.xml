@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Go Bus</string>
     <string name="registrer">Registrarse</string>
-    <string name="registrar">Registrar</string>
+    <string name="registrar">Crear Usuario</string>
     <string name="login">Iniciar Sesion</string>
     <string name="password">Contraseña</string>
     <string name="username">Usuario</string>
@@ -68,16 +68,16 @@
 
     <string name="send_email">Enviar Correo Con el resumen de la lista</string>
     <string name="img_product_desc">imagen del producto</string>
-    <string name="seleccione_origen">Seleccione origen</string>
+    <string name="seleccione_origen">Planea tu viaje</string>
     <string name="latitud">Latitud</string>
     <string name="longitud">Longitud</string>
     <string name="marcar_ubicacion">Marcar Ubicacion</string>
     <string name="fijar_origen">Fijar Origen</string>
-    <string name="seleccionar_destino">Seleccionar Destino</string>
+    <string name="seleccionar_destino">¿A donde quieres ir?</string>
     <string name="fijar_destino">Fijar Destino</string>
     <string name="calle_principal_y_calle_secundaria">(Calle Principal y Calle Secundaria)</string>
     <string name="update_user">Editar Usuario</string>
-    <string name="update_User">Actualizar Usuario</string>
+    <string name="update_User">Actualizar</string>
     <string name="contrase_a_nueva">Contraseña Nueva</string>
     <string name="repita_contrase_a_nueva">Repita Contraseña Nueva</string>
     <string name="contrase_a_antigua">Contraseña Antigua</string>

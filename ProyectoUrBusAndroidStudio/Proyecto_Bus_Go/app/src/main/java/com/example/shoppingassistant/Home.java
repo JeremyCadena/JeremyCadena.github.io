@@ -36,6 +36,7 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         DrawerLayout.DrawerListener {
@@ -51,7 +52,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private FirebaseApiClient firebaseApiClient;
 
     private User userF = new User();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(android.R.color.white));
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);

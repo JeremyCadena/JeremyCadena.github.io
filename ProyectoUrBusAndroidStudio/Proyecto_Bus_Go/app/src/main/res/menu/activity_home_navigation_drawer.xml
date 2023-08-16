@@ -23,7 +23,8 @@
         <item
             android:id="@+id/nav_logOut"
             android:icon="@drawable/salir_foreground"
-            android:title="@string/menu_logOut" />
+            android:title="@string/menu_logOut"
+            />
 
 
     </group>

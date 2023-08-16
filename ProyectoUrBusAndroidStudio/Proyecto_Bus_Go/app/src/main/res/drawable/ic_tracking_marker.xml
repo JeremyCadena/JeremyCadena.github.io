@@ -3,7 +3,7 @@
     <!-- Círculo azul -->
     <item>
         <shape android:shape="oval">
-            <solid android:color="#2196F3" />
+            <solid android:color="#EC1C54" />
         </shape>
     </item>
     <!-- Triángulo blanco en sentido contrario -->

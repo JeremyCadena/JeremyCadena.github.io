@@ -13,11 +13,11 @@
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/logorojo"
         android:label="@string/txtUrBus"
-        android:roundIcon="@drawable/logo"
+        android:roundIcon="@drawable/logorojo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="android:label"
         tools:targetApi="31">
         <activity

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -18,6 +19,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.shoppingassistant.controller.ImagePagerAdapter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +33,7 @@ import org.osmdroid.views.overlay.Polyline;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.Call;
@@ -66,6 +70,11 @@ public class StartRoute extends AppCompatActivity implements LocationListener {
 
         map = findViewById(R.id.mapStartRoute);
         btnStartRoute = findViewById(R.id.btnStartRoute);
+
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        List<Integer> images = Arrays.asList(R.drawable.publicidad_1, R.drawable.publicidad_2, R.drawable.publicidad_3, R.drawable.publicidad_4, R.drawable.publicidad_5);
+        ImagePagerAdapter adapter = new ImagePagerAdapter(this, images);
+        viewPager.setAdapter(adapter);
 
         map.setBuiltInZoomControls(true);
         mapController = (MapController) map.getController();
